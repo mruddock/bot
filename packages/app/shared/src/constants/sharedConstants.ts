@@ -188,6 +188,7 @@ export const SharedConstants = {
       ShowProgressIndicator: 'progress-indicator:show',
       ShowOpenUrlDialog: 'chat:open-url',
       ShowDataCollectionDialog: 'data-collection:show',
+      ShowCustomActivityEditor: 'custom-activity-editor:show',
     },
   },
   ContentTypes: {
@@ -200,7 +201,7 @@ export const SharedConstants = {
     CONTENT_TYPE_NGROK_DEBUGGER: 'application/vnd.microsoft.bfemulator.document.ngrokDebugger',
   },
   Channels: {
-    ReadmeUrl: 'https://raw.githubusercontent.com/Microsoft/BotFramework-Emulator/master/content/CHANNELS.md',
+    ReadmeUrl: 'https://raw.githubusercontent.com/Microsoft/BotFramework-Emulator/main/content/CHANNELS.md',
     HelpLabel: 'Get started with channels (Bot Inspector)',
   },
   DocumentIds: {

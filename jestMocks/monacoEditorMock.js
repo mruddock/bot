@@ -30,22 +30,16 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import { ConversationParameters } from 'botframework-schema';
 
-import { ChannelService } from '../channelService';
-import { EmulatorMode } from '../emulatorMode';
-import { User } from '../user';
-
-export interface StartConversationParams extends ConversationParameters {
-  endpoint?: string;
-  appId?: string;
-  appPassword?: string;
-  user?: User;
-  mode?: EmulatorMode;
-  channelService?: ChannelService;
-  conversationId?: string;
-  randomSeed?: number;
-  randomValue?: number;
-  speechKey?: string;
-  speechRegion?: string;
-}
+module.exports = {
+  editor: {
+    createModel: () => null,
+  },
+  languages: {
+    json: {
+      jsonDefaults: {
+        setDiagnosticsOptions: () => null,
+      },
+    },
+  },
+};

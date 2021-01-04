@@ -30,22 +30,34 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import { ConversationParameters } from 'botframework-schema';
 
-import { ChannelService } from '../channelService';
-import { EmulatorMode } from '../emulatorMode';
-import { User } from '../user';
+import { connect } from 'react-redux';
+import { ConversationService } from '@bfemulator/sdk-shared';
+import { Activity } from 'botframework-schema';
 
-export interface StartConversationParams extends ConversationParameters {
-  endpoint?: string;
-  appId?: string;
-  appPassword?: string;
-  user?: User;
-  mode?: EmulatorMode;
-  channelService?: ChannelService;
-  conversationId?: string;
-  randomSeed?: number;
-  randomValue?: number;
-  speechKey?: string;
-  speechRegion?: string;
-}
+import { RootState } from '../../../state';
+import { DialogService } from '../service';
+
+import { CustomActivityEditor, CustomActivityEditorProps } from './customActivityEditor';
+
+const mapStateToProps = (state: RootState) => {
+  const activeDocumentId = state.editor.editors[state.editor.activeEditor].activeDocumentId;
+  return {
+    conversationId: state.chat.chats[activeDocumentId].conversationId,
+    serverUrl: state.clientAwareSettings.serverUrl,
+  };
+};
+
+const mapDispatchToProps = (): Partial<CustomActivityEditorProps> => {
+  return {
+    onDismiss: () => {
+      DialogService.hideDialog();
+    },
+    onSendActivity: (activity: Activity, conversationId: string, serverUrl: string) => {
+      ConversationService.sendActivityToBot(serverUrl, conversationId, activity);
+      DialogService.hideDialog();
+    },
+  };
+};
+
+export const CustomActivityEditorContainer = connect(mapStateToProps, mapDispatchToProps)(CustomActivityEditor);
